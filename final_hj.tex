@@ -30,7 +30,7 @@
 % proceedings, working notes, and technical reports.
 %
 \title{[Final Paper] Deep Reinforcement Learning with Hierarchical Recurrent Encoder-Decoder for Conversation }
-\author{Heejin Jeong* \and Xiao Ling \\ \\
+\author{Heejin Jeong \and Xiao Ling \\ \\
   Final Project Paper for CIS700-007 Spring 2017\\}
 
 \maketitle
@@ -68,7 +68,7 @@ The results of the mutual information model were not good at all. First of all, 
 \begin{align}
     J(\theta) =&\; \mathbf{E} [-m(\hat{a},[u_{t-1},u_t])-c_l N_a \nonumber \\
      &\; + c_r \sum_{1\leq i < N_a} \mathbbm{1}(w_i^{(a)} == w_{i+1}^{(a)}) \nonumber \\ 
-     &\; +c_d \mathbbm{1}(a == \text{"no"} or \text{"i am sorry"})]
+     &\; +c_d \mathbbm{1}(a == \text{"no" or "i am sorry"})]
 \end{align}
 where $c_l$, $c_r$, and $c_d$ are constant weights and $w_i^{(a)}$ is the $i$th word in a sentence $a$. However, those additional reward and penalties didn't improve the overall quality of responses. The Table.\ref{table:mi_02} shows an example of after 20 steps and the Table.\ref{table:mi_03} shows an example after training for 540 steps. Since we considered only the next word in the repeated-words penalty, the generated response repeat a set of words. Also, the outcomes tend to be unnecessarily long.
 
