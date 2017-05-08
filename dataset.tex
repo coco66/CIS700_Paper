@@ -1,0 +1,25 @@
+We first trained the modified SEQ2SEQ model on the CALLHOME American English Speech corpus (LDC97S42), consisting of 120 of 30-minute phone conversations between native English speakers.The size of vocabulary we used is 8038. However, in most of the conversation datasets, one speaker talks a long sentence or several sentences in a row and the other speaker answers with one or two words such as \textit{"mhm"},\textit{"okay"}, and \textit{"yeah"} as shown in Table.\ref{table:phone_data}. In fact, about 20\% of the utterances of the dataset is \textit{"mhm"}. As a results, the trained model after 44200 steps generated a short answer for long input utterances and a long answer for short input utterances (Table.\ref{table:phone_result}). Therefore, we concluded that this dataset may not have been appropriate for learning a dialog generation model, and used OpenSubtitles dataset (http://opus.lingfil.uu.se/OpenSubtitles.php) with 50005 vocabulary size. The DRL paper also used this dataset, but unlike the paper, we didn't extract \textit{"i don't know what you are talking about"}. Instead, we refined abbreviated words such as \textit{"i'm"} $\rightarrow$ \textit{"i am"}, {"you're"} $\rightarrow$ \textit{"you are"}, {"i've"} $\rightarrow$ \textit{"i have"}, {"wanna"} $\rightarrow$ \textit{"want to"}, {"gonna"} $\rightarrow$ \textit{"going to"}, {"don't"} $\rightarrow$ \textit{"do not"}, etc. The tokenization part was mostly done by Xiao Ling.
+
+\begin{table}[t!]
+    \centering
+    \small
+    \caption{\small Example Conversation in the CALLHOME corpus}
+    \begin{tabular}{rl}
+    	\hline
+      \hline
+        \textbf{A:} & who is in um someone not that they have problems but\\
+        		    & someone who's like an okay student but kind of on the\\
+        			& borderline you know like maybe not a great homelife\\
+        			& and we would ha i got paired up\\
+		\textbf{B:} & uh-huh \\
+\textbf{A:} & with someone at um lipsmack i forget the school it was\\
+			& actually in port richmond um breath i forget the name\\
+			& of the school\\\
+\textbf{B:} & really\\
+\textbf{A:} & hensfiel no it was in the philadelphia school system and\\ 
+			& it it was a middle school\\
+\textbf{B:} & mhm\\
+      \hline
+    \end{tabular}
+    \label{table:phone_data}
+\end{table}
