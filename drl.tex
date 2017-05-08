@@ -2,10 +2,12 @@ In the RL framework, there is a learner in a certain state $s$ and the learner e
 \[
 	\mathbf{E}[r_t + \gamma r_{t+1} + \cdots + \gamma^{T-t}r_T | s_t, \pi^* ]
 \]
-where $T$ is time horizon and $\gamma$ is a discount factor which controls the relative importance of the immediate reward for the learner. If $\pi^{(a)}$ differs from $\pi^*$, the learning method is categorized to \textit{off-policy}, and if $\pi^{(a)} = \pi^*$, the method is \textit{on-policy}. In order to apply RL to a certain learning task, we need to define an appropriate learning system first. In this paper, we followed the learning system defined in \cite{Li}. 
+where $T$ is time horizon and $\gamma$ is a discount factor which controls the relative importance of the immediate reward for the learner. If $\pi^{(a)}$ differs from $\pi^*$, the learning method is categorized to \textit{off-policy}, and if $\pi^{(a)} = \pi^*$, the method is \textit{on-policy}. In order to apply RL to a certain learning task, we need to define an appropriate learning system first. In this project, we followed the learning system defined in \cite{Li}. 
+
 \subsection{Learning System for Dialog Generation}
-The learning system consists of two agents where they take turns talking with each other, $p_1, q_1, p_2, q_2, \cdots, p_t, q_t$. $p_i$ and $q_i$ represent $i$-th utterance of the first and the second agent in a conversation, respectively. Unlike the paper of \cite{Li}, we will use $u_i$ as a notation $i$-th utterance of a conversation regardless which agent spoke the utterance in order to make sure that the learning model is trained with both agents. \\
-A state is defined by the previous two dialog turns, $s_t = [u_{t-1}, u_t]$. Specifically, the concatenated vector of the two utterance vectors is used as an input of the SEQ2SEQ encoder. An action $a$ is defined as a dialog utterance to generate. The action space, $\mathcal{A}$ is considered as an infinite space, but we constrained the maximum length of the generated utterance, $L$, and the number of available vocabularies, $|V|$ ($V$ is a set of available vocabulary). Therefore, $|\mathcal{A}|=L\times |V|$ in our model. The RL policy, $p_{RL}$ use the form of a SEQ2SEQ encoder-decoder defined by its parameters. 
+The learning system consists of two agents where they take turns talking with each other. Unlike the notations in the paper \cite{Li}, we will use $u_i$ as a notation for the $i$-th utterance of a conversation regardless which agent spoke it in order to make sure that the learning model is trained with both agents. \\
+A state is defined by the previous two dialog turns, $s_t = [u_{t-1}, u_t]$. Specifically, the concatenated vector of the two utterance vectors is used as an input of the SEQ2SEQ encoder. An action $a$ is defined as a dialog utterance to generate. The action space, $\mathcal{A}$, is considered as an infinite space, but we constrained the maximum length of the generated utterance, $L$, and the number of available vocabularies, $|V|$ ($V$ is a set of available vocabulary). Therefore, $|\mathcal{A}|=L\times |V|$ in our model. The RL policy, $p_{RL}$, uses the form of a SEQ2SEQ encoder-decoder defined by its parameters. 
+
 \subsection{Reward}
 \cite{Li} defined three reward functions and used the weighted sum of the rewards as a total reward. The first reward function measures the ease of answering a generated turn (or action) using the log likelihood of responding to that action with a dull response. They defined dull responses with 8 turns including "I don't know what you are talking about", "I have no idea", etc. The function is:
 \begin{equation}
@@ -21,7 +23,7 @@ The last reward function addresses semantic coherence considering mutual informa
 \begin{equation}
 r_{3,t} = \frac{1}{|a_t|} \log p_{seq2seq} (a_t|u_{t-1},u_t) + \frac{1}{|u_t|} \log p_{seq2seq}^{backward}(u_t|a_t) \label{eq:reward3}
 \end{equation}
-where $ p_{seq2seq}^{backward}$ the probability distribution with parameters learned by SEQ2SEQ but with sources and targets swapped. Therefore, this backward SEQ2SEQ model has to be separately trained before using the RL rewards. 
+where $ p_{seq2seq}^{backward}$ the probability distribution with parameters learned by SEQ2SEQ where sources and targets are swapped. Therefore, this backward SEQ2SEQ model has to be separately trained before using the RL rewards. 
 
 \subsection{Model}
 \begin{figure}[b!]
@@ -30,7 +32,7 @@ where $ p_{seq2seq}^{backward}$ the probability distribution with parameters lea
     \label{fig:three_steps}
     \caption{\small Training Procedure of the proposed Reinforcement Learning Model}
  \end{figure}
-Any RL method falls into one of policy-based, value-based, or actor-critic RL areas. Among policy-based RL methods, a policy gradient optimization (PGO) using REINFORCE algorithm \cite{Williams} has been widely used. \cite{Li} also used the REINFORCE algorithm for learning the RL model. The training procedure of the RL model is divided into three steps as shown in the Fig.\ref{fig:three_steps}. First, we train a SEQ2SEQ model and a SEQ2SEQ backward model. Next, we train a mutual information model learned with PGO using the semantic coherence (Eq.\ref{eq:reward3}) as an only reward. As mentioned earlier, the two pre-trained models are used to compute the reward. The policy parameters of the model is initialized by the parameters of the pre-trained SEQ2SEQ model. The objective function to maximize is:
+Any RL method falls into one of policy-based, value-based, or actor-critic RL areas. Among policy-based RL methods, a policy gradient optimization (PGO) using REINFORCE algorithm \cite{Williams} has been widely used. \cite{Li} also used the REINFORCE algorithm for learning the RL model. The training procedure of the RL model is divided into three steps as shown in the Fig.\ref{fig:three_steps}. First, we train a SEQ2SEQ model and a SEQ2SEQ backward model. Next, we train a mutual information model learned by PGO maximizing the semantic coherence (Eq.\ref{eq:reward3}). The policy parameters of the model are initialized by the parameters of the pre-trained SEQ2SEQ model, and its objective function is:
 \begin{equation}
 	J(\theta)= 	\mathbf{E} [m(\hat{a},[u_{t-1},u_t])]
 \end{equation}
@@ -39,4 +41,5 @@ where $m(\hat{a},[u_{t-1},u_t])$ is equal to $r_{3,t}$ in the Eq.\ref{eq:reward3
 	\nabla J(\theta) = m(\hat{a},[u_{t-1},u_t]) \nabla \log p_{RL}(\hat{a},[u_{t-1},u_t]) \label{eq:gradient}
 \end{equation}
 
-Then, we update the parameters in the encoder-decoder model using stochastic gradient descent (SGD). In addition to the standard PGO method, \cite{Li} adopted a curriculum learning strategy proposed by \cite{Ranzato} and a baseline strategy. The baseline strategy is common in implementing PGO method since PGO tends to have high variance, and the strategy helps to reduce the variance.
+Then, we update the parameters in the encoder-decoder model using stochastic gradient ascent. In addition to the standard PGO method, \cite{Li} adopted a curriculum learning strategy proposed by \cite{Ranzato} and a baseline strategy. The baseline strategy is common in implementing PGO method since PGO tends to have high variance, and the strategy helps to reduce the variance.
+

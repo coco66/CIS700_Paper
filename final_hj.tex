@@ -56,12 +56,13 @@
 \input{dataset.tex}
 
 \subsection{Implementation}
-For the SEQ2SEQ model, we applied Sequence to sequence with attention mechanism and used GRU cells instead of LSTM cells. We implemented models in tensorflow version 1.0.1. We used \texttt{embedding\_attention\_seq2seq()} function in \texttt{seq2seq.py} and related functions/codes written in tensorflow. We also utilized \texttt{seq2seq\_model.py} in tensorflow version 0.12.x as a bottom line of model codes.\\
+Although it is not common to explain code structures in an academic paper, we explicitly mentioned functions and files in tensorflow we used as well as those written by us in this section.  
+For the SEQ2SEQ model, we applied Sequence to sequence with attention mechanism and used GRU cells instead of LSTM cells. We used 3 layers and 512 units for all models. We implemented models in tensorflow version 1.0.1. We used \texttt{embedding\_attention\_seq2seq()} function in \texttt{seq2seq.py} and related functions/codes written in tensorflow. We also utilized \texttt{seq2seq\_model.py} in tensorflow version 0.12.x as a bottom line.\\
 The \texttt{seq2seq\_model.py} is structured as follow (see Fig.\ref{fig:mi_architecture}): when the model is initialized, three main lists of placeholders are constructed - encoder, decoder, and weight. The length of the lists are encoder size, decoder size, and decoder size, respectively. Each element of a list is a tensor with a shape [batch size, None]. Variables are also built and initialized. In each step of training, batch size data are sampled in a given training dataset and converted into a proper format in the function \texttt{get\_batch()} by operations such as padding, adding GO id, sizing, etc. Then, these are fed to the placeholders. Output logits are computed through \texttt{embedding\_attention\_seq2seq()} function and losses are computed using a softmax loss function. Then, variables in the encoder-decoder recurrent neural network (RNN) are updated. \\
-The mutual information model requires pre-trained SEQ2SEQ model and backward SEQ2SEQ model for its initialization and for computing mutual information score. The model first builds three placeholder lists - concatenated states (e.g. $u_{t-1},u_t$), the most recent state (e.g. $u_t$) and weights for the backward model. Unlike SEQ2SEQ, only batch size number of states are sampled in each learning step. Then, actions are generated from the current RL policy given the sampled states. These states, actions, weights are input to the pretrained SEQ2SEQ and backward SEQ2SEQ model, and we obtain log probabilities in each model. Then, the mutual information score is computed using the probabilities and the gradient in Eq.\ref{eq:gradient} is computed. Variables of the encoder-decoder RNN are updated.
+The mutual information model requires a pre-trained SEQ2SEQ model and a pre-trained backward SEQ2SEQ model for its initialization and for computing mutual information score. The model first builds three placeholder lists - concatenated states (e.g. $u_{t-1},u_t$), the most recent state (e.g. $u_t$) and weights for the backward model. Unlike SEQ2SEQ, only batch size number of states are sampled in each learning step. Then, actions are generated from the current RL policy given the sampled states. These states, actions, and weights are input to the pre-trained SEQ2SEQ and the pre-trained backward SEQ2SEQ model, and we obtain log probabilities from each model. Then, the mutual information score and the gradient in Eq.\ref{eq:gradient} are computed. According to the paper \cite{Li}, stochastic gradient descent (SGD) was applied to the objective function \ref{eq:obj_func}. However, since SGD is for minimization and the objective function has to be maximized, we used SGA instead to update variables of the encoder-decoder RNN.
 
 \subsection{Results}
-The training results of the backward SEQ2SEQ model after 109000 steps are presented in Table.\ref{table:backward_seq2seq}. Since it is a backward model, the bot generates the most likely utterance that will have the input utterance as its response. The examples in the Good section show good performance of the model. The generated responses in the Bad section do not make sense. The model tends to generate certain responses a lot such as "i m gonna go to the bathroom", or to repeat all or some words in an input utterance. The training results of SEQ2SEQ model with concatenated utterances after 107000 steps are presented in Table.\ref{table:seq2seq}. Each row of the table is one conversation, since the model consider two previous sentences. However, from the results, it was not hard to see that the model responses considering both two previous utterances. Also, it generates "i am sorry" or "no" many times. For example, for almost any human input utterance starting with "can you", it generates "no". \\
+The training results of the backward SEQ2SEQ model after 109000 steps are presented in Table.\ref{table:backward_seq2seq}. Since it is a backward model, the bot generates the most likely utterance that will have the input utterance as its response. The examples in the Good section show good performance of the model. The generated responses in the Bad section do not make sense. The model tends to generate certain responses a lot such as "i am going to go to the bathroom", or to repeat all or some words in an input utterance. The training results of the SEQ2SEQ model with concatenated utterances after 107000 steps are presented in Table.\ref{table:seq2seq}. Each row of the table is one conversation, since the model consider two previous sentences. However, from the results, it was not hard to see that the model responses considering both two previous utterances. Also, it generates "i am sorry" or "no" many times. For example, for almost any human input utterance starting with "can you", it generates "no". \\
 We wanted to see if the RL model were able to improve such dull response issues. We implemented only mutual information model without the curriculum strategy. However, during the decoding step after training, we found out that there might be an initialization problem due to the variable name feature since we use three models with a similar structure. Due to the time constraint, we were unable to solve the issue and present results in this paper. We hope we can solve the issue before the final presentation and will be able to add results in the final version of our final paper.
 
 \begin{table}[bt!]
@@ -71,29 +72,29 @@ We wanted to see if the RL model were able to improve such dull response issues.
     \begin{tabular}{c|rl}
     	\hline
       \hline
-        & \textbf{human:} & i don't know man\\
+        & \textbf{human:} & i do not know man\\
 		& \textbf{bot:} & what do you think\\		
 & \textbf{human:} & that s amazing \\
 & \textbf{bot:} & wow \\
 & \textbf{human:} & that works best for me \\
-& \textbf{bot:} & i il be right back \\
+& \textbf{bot:} & i will be right back \\
 Good & \textbf{human:} & I love you too \\
 & \textbf{bot:} & i love you \\
-& \textbf{human:} & i know i'm hot \\
-& \textbf{bot:} & i m a little nervous \\
-& \textbf{human:} & i'm done with you \\
-& \textbf{bot:} & i m a fucking bitch \\
+& \textbf{human:} & i know i am hot \\
+& \textbf{bot:} & i am a little nervous \\
+& \textbf{human:} & i am done with you \\
+& \textbf{bot:} & i am a fucking bitch \\
 \hline
-& \textbf{human:} & i m gonna go to the bathroom\\
-& \textbf{bot:} & i m gonna go to the bathroom \\
+& \textbf{human:} & i am going to go to the bathroom\\
+& \textbf{bot:} & i am going to go to the bathroom \\
 & \textbf{human:} & this is weird \\
-& \textbf{bot:} & i m gonna be a great man \\
+& \textbf{bot:} & i am going to be a great man \\
 Bad & \textbf{human:} & okay\\
-& \textbf{bot:} & i m gonna go to the bathroom\\
+& \textbf{bot:} & i am going to go to the bathroom\\
 & \textbf{human:} & you look gorgeous \\
-& \textbf{bot:} & i m gonna go see the kitchen \\
+& \textbf{bot:} & i am going to go see the kitchen \\
 & \textbf{human:} & fine\\
-& \textbf{bot:} & i m fine\\
+& \textbf{bot:} & i am fine\\
       \hline
     \end{tabular}
     \label{table:backward_seq2seq}
@@ -140,7 +141,8 @@ Bad & \textbf{human:} & okay\\
     \label{table:seq2seq}
 \end{table}
 
-
+\section{Discussion}
+\input{discussion.tex}
 % include your own bib file like this:
 %\bibliographystyle{acl}
 %\bibliography{acl2017}
