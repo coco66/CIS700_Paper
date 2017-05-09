@@ -1,6 +1,8 @@
 In this section explain the hiearchical recurrent neural net (HRED) model proposed by \cite{Serban} and \cite{Sordoni}, the problem they posed and how HRED solves these problems. In the original paper by \cite{Sordini}, HRED was proposed as a model that could generate context-senstitive queries, then \cite{Serban} adapted it to train an end-to-end history-aware conversation model.
 
-Now we wish to review \cite{Serban} in more detail. They denote a dialogue as a sequence of $M$ utterances $U_m$: $D = \{U_1, \ldots, U_M\}$ between two speakers, each utterance contains $N_m$ tokens: $U_m = \{w_{m,1},\ldots,w_{m,N_m}\}$. $\cite{Serban}$ allowed the random variable $w_{m,n}$ to range over teh vocabular and ``speech acts", although in our case we only considered words. Next they defined a distrubtion $P$ with parameter $\theta$ over the set of all possible dialogues of any length, and factorized $P$ by:
+\subsection{Recurrent Neural Net}
+
+Now we wish to review recurrent neural net (RNN) in some detail. We denote a dialogue as a sequence of $M$ utterances $U_m$: $D = \{U_1, \ldots, U_M\}$ between two speakers, each utterance contains $N_m$ tokens: $U_m = \{w_{m,1},\ldots,w_{m,N_m}\}$. $\cite{Serban}$ allowed the random variable $w_{m,n}$ to range over the vocabular and ``speech acts", although in our case we only considered words. Next they defined a distribution $P$ with parameter $\theta$ over the set of all possible dialogues of any length, and factorized $P$ by:
     \begin{align*}
         P_{\theta}(U_1, \ldots, U_M) &= \prod_{m=1}^M P_{\theta}(U_m | U_{<m}) \\
                                      &= \prod_{m=1}^M \prod_{n=1}^{N_m} P_{\theta} (w_{m,n}|w_{m,<n}, U_{<m}),
@@ -20,6 +22,9 @@ where $h_n \in \mathbbm{R}^{d_h}$ is a hidden state computed by a recurrent neur
 
 where $I \in \mathbbm{R}^{d_h \times |V|}$ is the input word embeding. Again note that the hidden state is only a function of the past. 
 
+\subsection{Hierarchical Recurrent Neural Net}
+
+HRED augments the basic RNN model by explicitly learning a transition function over the hidden dynamic of the conversation. 
 
 
 
