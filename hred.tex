@@ -1,4 +1,4 @@
-In this section explain the hiearchical recurrent neural net (HRED) model proposed by \cite{Serban} and \cite{Sordoni}, the problem they posed and how HRED solves these problems. In the original paper by \cite{Sordini}, HRED was proposed as a model that could generate context-senstitive queries, then \cite{Serban} adapted it to train an end-to-end history-aware conversation model.
+In this section explain the hiearchical recurrent neural net (HRED) model proposed by \cite{Serban} and \cite{Sordoni}, the problem they posed and how HRED solves these problems. In the original paper by \cite{Sordoni}, HRED was proposed as a model that could generate context-senstitive queries, then \cite{Serban} adapted it to train an end-to-end history-aware conversation model.
 
 \subsection{Recurrent Neural Net}
 
@@ -24,7 +24,49 @@ where $I \in \mathbbm{R}^{d_h \times |V|}$ is the input word embeding. Again not
 
 \subsection{Hierarchical Recurrent Neural Net}
 
-HRED augments the basic RNN model by explicitly learning a transition function over the hidden dynamic of the conversation. 
+HRED augments the basic RNN model by explicitly learning a transition function over the hidden dynamic of the conversation or  ``session". Serban and Sordoni learned this transition function using a session level RNN. Specifcially, this RNN predicts the next utterance by:
+    \begin{align*}
+        P(U_m|U_{<m}) &= \prod_{n=1}^{N_m} P(w_n | w_{<n-1}, U_{m-1}) \\
+                      &= \frac{\exp(o_{v}^T w(d_{m,n-1}, w_{{m,n-1}}))}{\sum_{k} \exp(o_{k}^Tw(d_{m,n-1}, w_{m,n-1}))},
+    \end{align*}
+
+where $w(d_{m,n-1}, w_{m,n-1}) = H_o d_{m,n-1} + E_o w_{m,n-1} + b_o,$ so that the next utterance is a function of all pervious utterances. In summary, in HRED each utterance is a function of the previous utterance, and each word in the utterance is a function of all previous words in the utterance. A session level RNN learns the transition between utterances vector, and sentence level RNN learns the transition between words. 
+
+\subsection{Learning}
+
+Finally, the model is trained end-to-end by maximizing the log-likelihood of the whole session:
+
+    \begin{align*}
+        Loss(S) &= \sum_{m=1}^M log P(U_m|U_{<m}) \\
+                &= \sum_{m=1}^M \sum_{n=1}^{N_m} log P(w_{m,n} | w_{m,<n}, U_{<m}).
+    \end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
