@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 MAY 2017 23:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 MAY 2017 23:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -275,6 +275,12 @@ LaTeX Warning: Label `table:phone_data' multiply defined.
 
 LaTeX Warning: Label `table:mi_03' multiply defined.
 
+
+LaTeX Warning: Label `table:mi_03' multiply defined.
+
+
+LaTeX Warning: Label `table:mi_03' multiply defined.
+
 )
 \openout1 = `final_hj.aux'.
 
@@ -543,18 +549,22 @@ Overfull \hbox (3.43065pt too wide) in paragraph at lines 199--201
  [][] 
  []
 
+[4]
+Overfull \hbox (3.43065pt too wide) in paragraph at lines 217--219
+ [][] 
+ []
+
 
 Overfull \hbox (3.43065pt too wide) in paragraph at lines 230--232
  [][] 
  []
 
-[4] (./discussion.tex) (./final_hj.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [5])
-[6
+Overfull \hbox (3.43065pt too wide) in paragraph at lines 245--247
+ [][] 
+ []
 
-] (./final_hj.aux)
+(./discussion.tex [5]) (./final_hj.bbl) [6] (./final_hj.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -565,11 +575,11 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  4630 strings out of 493014
  69849 string characters out of 6133351
- 151431 words of memory out of 5000000
+ 151432 words of memory out of 5000000
  8013 multiletter control sequences out of 15000+600000
  47940 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,10n,77p,1309b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,10n,77p,1860b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc} </Users/ling
 xiao/Library/texlive/2016/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
@@ -582,7 +592,7 @@ ive/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016
 1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/time
 s/utmr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.
 pfb>
-Output written on final_hj.pdf (6 pages, 224004 bytes).
+Output written on final_hj.pdf (6 pages, 226211 bytes).
 PDF statistics:
  74 PDF objects out of 1000 (max. 8388607)
  50 compressed objects within 1 object stream

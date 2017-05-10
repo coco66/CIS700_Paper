@@ -203,20 +203,7 @@ Bad & \textbf{human:} & okay\\
 
 \subsection{Results: HRED}
 
-In this section we discuss the results for HRED. It was trained for 5 days on a GeForce GTX TITAN X GPU. The results after five hours are displayed in table 8. We keep the example brief and show an elucidating exmaple: after five hours the model appears to have acquired a basic grammar, but have a tendancy to output repeated words. 
-
-% ut:  <unk> the answers to the questions i asked him </s> he can t talk anymore but we may be able to
-% Sample output: warrant </s> you idiot </s> i got skills </s> </c>
-% Sample output: little see the different </s> you idiot </s> oh get up </s> </c>
-% Sample output: little see the different </s> you idiot </s> oh get out </s> </c>
-% Sample output: peek trying to prison </s> you idiot </s> oh get out </s> </c>
-% Sample output: peek inside huh </s> let s go </s> brushes waving in the breeze </s> </c>
-% Sample output: peek inside huh </s> lookie lookie lookie </s> get way every body down </s> </c>
-% Sample output: peek inside huh </s> lookie lookie lookie </s> get way i attitude just shot </s> </c>
-% Sample output: little see the different </s> you idiot </s> weren t you on tv last night </s> </c>
-% Sample output: little see the basement </s> stop the reload cover me go </s> weren t you on tv last night </s> </c>
-% Sample output: peek inside huh </s> lookie lookie lookie </s> get way every body down to make out that position 1 turning up out of me </s> </c>
-
+In this section we discuss the results for HRED. It was trained for 5 days on a GeForce GTX TITAN X GPU. The results after five hours are displayed in table 8. We keep the example brief and show an elucidating exmaple: after five hours the model appears to have acquired a basic grammar, but have a tendancy to output repeated words. Next we direct our attention to table 8, where we show the results after training for 72 hours. We observed a marked decrease in sentences with repeated words, and the table shows one example of a response that appears to have some ``semantic" relationship with the question asked. We ultimately trained the models for 5 days, and the results are displayed in table 10. In general, the results after 5 days do not appear qualitatively better than results after just 72 hours. In particular, we see no evidence that HRED is tracking ``some" conversation state. 
 
 \begin{table}[bt!]
     \centering
@@ -231,21 +218,33 @@ In this section we discuss the results for HRED. It was trained for 5 days on a 
     \label{table:mi_03}
 \end{table}
 
+\begin{table}[bt!]
+    \centering
+    \small
+    \caption{\small HRED after 5 hours}
+    \begin{tabularx}{0.48\textwidth}{rX}
+        \hline \hline
+        \textbf{human:} & do you have any weapons explosives. any history of violent conduct \\
+        \textbf{bot:} & a very interracial couples you re not gonna die you that s complicated \\
+        \hline \hline    
+    \end{tabularx}
+    \label{table:mi_03}
+\end{table}
 
-
-% Sample input:  <unk> i know he s here between us </s> i can sense him </s> the rapist wants you to know
-% Sample output: it </s> don t you run from me </s> get okay </s> </c>
-% Sample output: it </s> this is a stakeout </s> because i m gonna have </s> </c>
-% Sample output: it </s> this is a stakeout </s> we d you just okay </s> </c>
-% Sample output: it </s> this is a stakeout </s> she could have went pro </s> </c>
-% Sample output: it </s> this is a stakeout </s> because i m a black man </s> </c>
-% Sample output: it </s> this is a stakeout </s> all of you to get back welcome </s> </c>
-% Sample output: it </s> this is a stakeout </s> i spent six months in prison because of you </s> </c>
-% Sample output: it </s> this is a stakeout </s> i could have sorry of the citizens of schedule </s> </c>
-% Sample output: it </s> this is a stakeout </s> i don t have to get out there so soon </s> </c>
-% Sample output: it </s> this is a stakeout </s> i spent six months in prison because of you </s> silent alarm more back this occupy the buildings </s> </c>
-
-
+\begin{table}[bt!]
+    \centering
+    \small
+    \caption{\small HRED after 5 hours}
+    \begin{tabularx}{0.48\textwidth}{rX}
+        \hline \hline
+        \textbf{human:} & i can t remember anything \\
+        \textbf{bot:} & i got where the target and make preparation on froebe in jill \\
+        \textbf{human:} & i m a guinea pig \\
+        \textbf{bot: } & morning the problem your brutality \\
+        \hline \hline    
+    \end{tabularx}
+    \label{table:mi_03}
+\end{table}
 
 
 \section{Discussion}
