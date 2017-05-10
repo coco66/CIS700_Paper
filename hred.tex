@@ -34,7 +34,7 @@ where $w(d_{m,n-1}, w_{m,n-1}) = H_o d_{m,n-1} + E_o w_{m,n-1} + b_o,$ so that t
 
 \subsection{Learning}
 
-HRED is trained end-to-end by maximizing the log-likelihood of the whole session:
+HRED is trained end-to-end by maximizing the log-likelihood of the whole session $S$:
 
     \begin{align*}
         Loss(S) &= \sum_{m=1}^M log P(U_m|U_{<m}) \\

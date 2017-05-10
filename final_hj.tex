@@ -62,7 +62,7 @@ For the SEQ2SEQ model, we applied Sequence to sequence with attention mechanism 
 The \texttt{seq2seq\_model.py} is structured as follow (see Fig.\ref{fig:mi_architecture}): when the model is initialized, three main lists of placeholders are constructed - encoder, decoder, and weight. The length of the lists are encoder size, decoder size, and decoder size, respectively. Each element of a list is a tensor with a shape [batch size, None]. Variables are also built and initialized. In each step of training, batch size data are sampled in a given training dataset and converted into a proper format in the function \texttt{get\_batch()} by operations such as padding, adding GO id, sizing, etc. Then, these are fed to the placeholders. Output logits are computed through \texttt{embedding\_attention\_seq2seq()} function and losses are computed using a softmax loss function. Then, variables in the encoder-decoder recurrent neural network (RNN) are updated. \\
 The mutual information model requires a pre-trained SEQ2SEQ model and a pre-trained backward SEQ2SEQ model for its initialization and for computing mutual information score. The model first builds three placeholder lists - concatenated states (e.g. $u_{t-1},u_t$), the most recent state (e.g. $u_t$) and weights for the backward model. Instead of sampling several action candidates given an input from the policy probability distribution $p_{RL}$ as presented in the paper, we sampled a batch of inputs (size of 64) and selected the best action of each sampled state based on their probability outcomes. These states (or inputs), actions, and weights become inputs to the pre-trained SEQ2SEQ and the pre-trained backward SEQ2SEQ model, and we obtain log probabilities from each model. Then, the mutual information score and the gradient in Eq.\ref{eq:gradient} are computed. According to the paper \cite{Li}, stochastic gradient descent (SGD) was applied to the objective function \ref{eq:obj_func}. However, since SGD is for minimization and the objective function has to be maximized, we used SGA instead to update variables of the encoder-decoder RNN. In this project, we implemented mutual information model without the curriculum and the baseline strategies.
 
-\subsection{Results}
+\subsection{Results: Backward SEQ2SEQ}
 The training results of the backward SEQ2SEQ model after 109000 steps are presented in Table.\ref{table:backward_seq2seq}. Since it is a backward model, the bot generates the most likely utterance that will have the input utterance as its response. The examples in the Good section show good performance of the model. The generated responses in the Bad section do not make sense. The model tends to generate certain responses a lot such as "i am going to go to the bathroom", or to repeat all or some words in an input utterance. The training results of the SEQ2SEQ model with concatenated utterances after 107000 steps are presented in Table.\ref{table:seq2seq}. Each row of the table is one conversation, since the model consider two previous sentences. However, from the results, it was not hard to see that the model responses considering both two previous utterances. Also, it generates "i am sorry" or "no" many times. For example, for almost any human input utterance starting with "can you", it generates "no". \\
 The results of the mutual information model were not good at all. First of all, since the mutual information score is averaged by the number of words in a sentence and each term is negative (log probability), we could see that the shorter a response is, the higher its score is. Also, it tends to generates lots of repeated words in a sentence. The example is shown in \ref{table:mi_01}. Therefore, we added an additional reward for the number of words, $N_a$ of an output sentence $a$ and penalties for the repeated words and for "i am sorry" or "no" response:
 \begin{align}
@@ -199,6 +199,54 @@ Bad & \textbf{human:} & okay\\
     \end{tabularx}
     \label{table:mi_03}
 \end{table}
+
+
+\subsection{Results: HRED}
+
+In this section we discuss the results for HRED. It was trained for 5 days on a GeForce GTX TITAN X GPU. The results after five hours are displayed in table 8. We keep the example brief and show an elucidating exmaple: after five hours the model appears to have acquired a basic grammar, but have a tendancy to output repeated words. 
+
+% ut:  <unk> the answers to the questions i asked him </s> he can t talk anymore but we may be able to
+% Sample output: warrant </s> you idiot </s> i got skills </s> </c>
+% Sample output: little see the different </s> you idiot </s> oh get up </s> </c>
+% Sample output: little see the different </s> you idiot </s> oh get out </s> </c>
+% Sample output: peek trying to prison </s> you idiot </s> oh get out </s> </c>
+% Sample output: peek inside huh </s> let s go </s> brushes waving in the breeze </s> </c>
+% Sample output: peek inside huh </s> lookie lookie lookie </s> get way every body down </s> </c>
+% Sample output: peek inside huh </s> lookie lookie lookie </s> get way i attitude just shot </s> </c>
+% Sample output: little see the different </s> you idiot </s> weren t you on tv last night </s> </c>
+% Sample output: little see the basement </s> stop the reload cover me go </s> weren t you on tv last night </s> </c>
+% Sample output: peek inside huh </s> lookie lookie lookie </s> get way every body down to make out that position 1 turning up out of me </s> </c>
+
+
+\begin{table}[bt!]
+    \centering
+    \small
+    \caption{\small HRED after 5 hours}
+    \begin{tabularx}{0.48\textwidth}{rX}
+        \hline \hline
+        \textbf{human:} & to be quite honest it is not very clear for me either?    \\
+        \textbf{bot:} & what let s a  bitch and i m know you s gone black to you in you in you to you to you out of it to black to move to me *\\
+        \hline \hline    
+    \end{tabularx}
+    \label{table:mi_03}
+\end{table}
+
+
+
+% Sample input:  <unk> i know he s here between us </s> i can sense him </s> the rapist wants you to know
+% Sample output: it </s> don t you run from me </s> get okay </s> </c>
+% Sample output: it </s> this is a stakeout </s> because i m gonna have </s> </c>
+% Sample output: it </s> this is a stakeout </s> we d you just okay </s> </c>
+% Sample output: it </s> this is a stakeout </s> she could have went pro </s> </c>
+% Sample output: it </s> this is a stakeout </s> because i m a black man </s> </c>
+% Sample output: it </s> this is a stakeout </s> all of you to get back welcome </s> </c>
+% Sample output: it </s> this is a stakeout </s> i spent six months in prison because of you </s> </c>
+% Sample output: it </s> this is a stakeout </s> i could have sorry of the citizens of schedule </s> </c>
+% Sample output: it </s> this is a stakeout </s> i don t have to get out there so soon </s> </c>
+% Sample output: it </s> this is a stakeout </s> i spent six months in prison because of you </s> silent alarm more back this occupy the buildings </s> </c>
+
+
+
 
 \section{Discussion}
 \input{discussion.tex}

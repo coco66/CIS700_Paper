@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 MAY 2017 15:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 MAY 2017 23:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -268,7 +268,14 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@loff=\dimen136
 \@vwid@roff=\dimen137
 ))
-No file final_hj.aux.
+(./final_hj.aux
+
+LaTeX Warning: Label `table:phone_data' multiply defined.
+
+
+LaTeX Warning: Label `table:mi_03' multiply defined.
+
+)
 \openout1 = `final_hj.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
@@ -284,7 +291,7 @@ LaTeX Font Info:    ... okay on input line 28.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 28.
-(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -383,67 +390,47 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 36.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 36.
- (./intro.tex
-
-LaTeX Warning: Citation `Sutskever' on page 1 undefined on input line 1.
-
-
-LaTeX Warning: Citation `Vinyals' on page 1 undefined on input line 1.
-
-
-LaTeX Warning: Citation `Sordoni' on page 1 undefined on input line 2.
-
-
-LaTeX Warning: Citation `Serban' on page 1 undefined on input line 2.
-
-
-LaTeX Warning: Citation `Li' on page 1 undefined on input line 2.
-
-
-LaTeX Warning: Citation `Serban' on page 1 undefined on input line 3.
-
-) (./drl.tex
-
-LaTeX Warning: Citation `Li' on page 1 undefined on input line 5.
-
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 7.
-
-LaTeX Warning: Citation `Li' on page 1 undefined on input line 12.
-
-
-Underfull \hbox (badness 1325) in paragraph at lines 12--13
-\OT1/ptm/m/n/10 Li et al. de-fined three re-ward func-tions and used the
+ (./intro.tex)
+Underfull \hbox (badness 1057) in paragraph at lines 1--40
+\OT1/ptm/m/n/10 frame-work to con-ver-sa-tional mod-el-ing and their model
  []
 
+(./hred.tex
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
+LaTeX Font Info:    Try loading font information for U+bbm on input line 16.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
+)
 [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
 ]
-<three_steps.png, id=14, 468.3096pt x 193.2018pt>
+Underfull \hbox (badness 2521) in paragraph at lines 37--38
+\OT1/ptm/m/n/10 HRED is trained end-to-end by max-i-miz-ing the log-
+ []
+
+) (./drl.tex
+Underfull \hbox (badness 1325) in paragraph at lines 12--13
+\OT1/ptm/m/n/10 Li et al. de-fined three re-ward func-tions and used the
+ []
+
+<three_steps.png, id=15, 468.3096pt x 193.2018pt>
 File: three_steps.png Graphic file (type png)
  <use three_steps.png>
 Package pdftex.def Info: three_steps.png used on input line 31.
 (pdftex.def)             Requested size: 202.3529pt x 83.48196pt.
 
 
-LaTeX Warning: Citation `Williams' on page 2 undefined on input line 35.
+Package caption Warning: \label without proper reference on input line 32.
+See the caption package documentation for explanation.
 
 
 LaTeX Warning: Reference `fig:three_steps' on page 2 undefined on input line 35
 .
 
-
-LaTeX Warning: Reference `eq:reward3' on page 2 undefined on input line 35.
-
-
-LaTeX Warning: Reference `eq:reward3' on page 2 undefined on input line 39.
-
-
-LaTeX Warning: Citation `Ranzato' on page 2 undefined on input line 44.
-
-) <mi_architecture.jpg, id=16, 518.93875pt x 446.66875pt>
+[2]) <mi_architecture.jpg, id=21, 518.93875pt x 446.66875pt>
 File: mi_architecture.jpg Graphic file (type jpg)
 
 <use mi_architecture.jpg>
@@ -456,11 +443,7 @@ Overfull \hbox (3.43065pt too wide) in paragraph at lines 51--52
 
 (./dataset.tex
 
-LaTeX Warning: Reference `table:phone_data' on page 2 undefined on input line 1
-.
-
-
-LaTeX Warning: Reference `table:phone_result' on page 2 undefined on input line
+LaTeX Warning: Reference `table:phone_result' on page 3 undefined on input line
  1.
 
 
@@ -479,69 +462,41 @@ Underfull \hbox (badness 1062) in paragraph at lines 1--2
  []
 
 
-Underfull \hbox (badness 1062) in paragraph at lines 1--2
-\OT1/ptm/m/n/10 for long in-put ut-ter-ances and a long an-swer for short
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+[]\OT1/ptm/m/n/10 Instead, we used the Open-Sub-ti-tles cor-pus
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1--2
-\OT1/ptm/m/n/10 (http://opus.lingfil.uu.se/OpenSubtitles.php) with 50005
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+\OT1/ptm/m/n/10 (http://www.opensubtitles.org/) for both HRED and
+ []
+
+
+Underfull \hbox (badness 1168) in paragraph at lines 3--4
+\OT1/ptm/m/n/10 DRL. The Open-Sub-ti-tles cor-pus is a bilin-gual par-al-lel
  []
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 7.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 11.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 7.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 11.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 7.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 11.
+
+Overfull \hbox (12.00713pt too wide) in paragraph at lines 35--49
+ [][] 
+ []
+
 )
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 61.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-
-LaTeX Warning: Reference `fig:mi_architecture' on page 2 undefined on input lin
-e 62.
-
-
-LaTeX Warning: Reference `eq:gradient' on page 2 undefined on input line 63.
-
-
-LaTeX Warning: Citation `Li' on page 2 undefined on input line 63.
-
-
-LaTeX Warning: Reference `eq:obj_func' on page 2 undefined on input line 63.
-
-
 Underfull \hbox (badness 3108) in paragraph at lines 60--64
 \OT1/ptm/m/n/10 The mu-tual in-for-ma-tion model re-quires a pre-trained
  []
 
-
-Underfull \vbox (badness 2027) has occurred while \output is active []
-
- [2 <./three_steps.png> <./mi_architecture.jpg>]
-
-LaTeX Warning: Reference `table:backward_seq2seq' on page 3 undefined on input 
-line 66.
-
-
-LaTeX Warning: Reference `table:seq2seq' on page 3 undefined on input line 66.
-
-
-LaTeX Warning: Reference `table:mi_01' on page 3 undefined on input line 67.
-
-LaTeX Font Info:    Try loading font information for U+bbm on input line 72.
-(/usr/local/texlive/2016/texmf-dist/tex/latex/bbm-macros/ubbm.fd
-File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-)
-
-LaTeX Warning: Reference `table:mi_02' on page 3 undefined on input line 73.
-
-
-LaTeX Warning: Reference `table:mi_03' on page 3 undefined on input line 73.
-
-
+[3 <./three_steps.png> <./mi_architecture.jpg>]
 Underfull \hbox (badness 10000) in alignment at lines 106--106
 [][][] 
  []
@@ -568,7 +523,7 @@ Overfull \hbox (3.43065pt too wide) in paragraph at lines 165--167
 
 
 Underfull \hbox (badness 6332) in paragraph at lines 171--171
-[]\OT1/ptm/m/n/10 Table 5: |\OT1/ptm/m/n/9 Mu-tual In-for-ma-tion Model with ad
+[]\OT1/ptm/m/n/10 Table 6: |\OT1/ptm/m/n/9 Mu-tual In-for-ma-tion Model with ad
 -di-tional re-
  []
 
@@ -579,7 +534,7 @@ Overfull \hbox (3.43065pt too wide) in paragraph at lines 182--184
 
 
 Underfull \hbox (badness 6332) in paragraph at lines 189--189
-[]\OT1/ptm/m/n/10 Table 6: |\OT1/ptm/m/n/9 Mu-tual In-for-ma-tion Model with ad
+[]\OT1/ptm/m/n/10 Table 7: |\OT1/ptm/m/n/9 Mu-tual In-for-ma-tion Model with ad
 -di-tional re-
  []
 
@@ -588,30 +543,35 @@ Overfull \hbox (3.43065pt too wide) in paragraph at lines 199--201
  [][] 
  []
 
-(./discussion.tex
 
-LaTeX Warning: Citation `Li' on page 3 undefined on input line 1.
+Overfull \hbox (3.43065pt too wide) in paragraph at lines 230--232
+ [][] 
+ []
 
-)
-No file final_hj.bbl.
-[3] [4] (./final_hj.aux)
+[4] (./discussion.tex) (./final_hj.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5])
+[6
+
+] (./final_hj.aux)
 
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4623 strings out of 493014
- 69775 string characters out of 6133351
- 153107 words of memory out of 5000000
+ 4630 strings out of 493014
+ 69849 string characters out of 6133351
+ 151431 words of memory out of 5000000
  8013 multiletter control sequences out of 15000+600000
  47940 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,10n,77p,1513b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
- </Users/lingxiao/Library/texlive/2016/texmf-var/fonts/pk/ljfour/public/bbm/b
-bm10.600pk>{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</us
+ 42i,10n,77p,1309b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc} </Users/ling
+xiao/Library/texlive/2016/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
 /local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
 ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
@@ -622,10 +582,10 @@ ive/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016
 1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/time
 s/utmr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.
 pfb>
-Output written on final_hj.pdf (4 pages, 211486 bytes).
+Output written on final_hj.pdf (6 pages, 224004 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
- 46 compressed objects within 1 object stream
+ 74 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
